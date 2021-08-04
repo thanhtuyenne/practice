@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Register</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+	
+</head>
+	<script>
+		var rgP = /^0[1-9]\d{8}$/;
+		var rgM = /^([a-z][a-z0-9_\.]+@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2})$/;
+		var rgU = /^[a-zA-Z]{1,}[a-zA-Z0-9]{4,}$/;
+		var rgPW = /^[a-zA-Z0-9][a-zA-Z0-9.,!@#$%^&*()_+]{5,}$/;
+		
+		$(document).ready(function(){
+			$("#txtPhone").focusout(function() {
+				if(validatePhone()) {
+					$("#txtPhone").css("border","2px solid green");
+					$("#errP").hide();
+					$("#valP").show();
+				} else {
+					$("#txtPhone").css("border","2px solid red");
+					$("#errP").show();
+					$("#valP").hide();
+				}
+			});
+			
+			$("#txtEmail").focusout(function() {
+				if(validateMail()) {
+				$("#txtEmail").css("border","2px solid green");
+					$("#errM").hide();
+					$("#valM").show();
+				} else {
+					$("#txtEmail").css("border","2px solid red");
+					$("#errM").show();
+					$("#valM").hide();
+				}
+			});
+			
+			$("#txtUsername").focusout(function() {
+				if(validateUser()) {
+				$("#txtUsername").css("border","2px solid green");
+					$("#errU").hide();
+					$("#valU").show();
+				} else {
+					$("#txtUsername").css("border","2px solid red");
+					$("#errU").show();
+					$("#valU").hide();
+				}
+			});
+			
+			$("#txtPass").focusout(function() {
+				if(validatePass()) {
+				$("#txtPass").css("border","2px solid green");
+					$("#errPw").hide();
+					$("#valPw").show();
+				} else {
+					$("#txtPass").css("border","2px solid red");
+					$("#errPw").show();
+					$("#valPw").hide();
+				}
+			});
+			
+			$("#txtConfirm").focusout(function() {
+				if(validateConf()) {
+				$("#txtConfirm").css("border","2px solid green");
+					$("#errC").hide();
+					$("#valC").show();
+				} else {
+					$("#txtConfirm").css("border","2px solid red");
+					$("#errC").show();
+					$("#valC").hide();
+				}
+			});
+			
+		});
+		
+		function validatePhone() {
+			var phone = $("#txtPhone").val();
+			if(rgP.test(phone)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		function validateMail() {
+			var mail = $("#txtEmail").val();
+			if(rgM.test(mail)){
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		function validateUser() {
+			var user = $("#txtUsername").val();
+			if(rgU.test(user)){
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		function validatePass() {
+			var password = $("#txtPass").val();
+			if(rgPW.test(password)){
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		function validateConf(){
+			var confirm = $("#txtConfirm").val();
+			var pass = $("#txtPass").val();
+			if(confirm == pass) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		function checkAllData() {
+			if(validateUser() && validatePass() && validateConf()
+			  && validateMail() && validatePhone()) {
+				$("#valS").show();
+				$("#valD").hide();
+				return false;
+			} else {
+				$("#valD").show();
+				$("#valS").hide();
+				return false;
+			}
+		}
+		
+	</script>
+	
+<style type="text/css">
+	h1 {
+		text-shadow: 3px 4px #081C69;
+		background-color: darkorange;
+		text-align: right;
+		font-weight: bold;
+		font-family: consolas;
+		margin-bottom: 15px;
+		color: white;
+	}
+	
+	.fa-exclamation-circle {
+		color: red;
+		display: none;
+		float: right;
+		margin-left: 5px;
+		margin-top: 10px;
+	}
+	
+	.form-group {
+		margin-left: 20px;
+	}
+	
+	.fa-check {
+		display: none;
+		color: green;
+		margin-left: 5px;
+		margin-top: 10px;
+	}
+	
+	.btn-primary {
+		background-color: #041444;
+	}
+	
+	.btn-primary:hover {
+		background-color: #fff;
+		color: #000;
+	}
+	
+	.alert {
+		display:none;
+	}
+	
+	.nortifi {
+		margin-top: 30px;
+	}
+}
+</style>
+<body>
+	<form action="#" method="post" id="formDemo"
+		  onsubmit="return checkAllData()">
+		<h1>Register Form</h1>
+  <div class="form-group row">
+    <label for="txtUsername" class="col-sm-3 col-form-label">Username</label> 
+    <div class="col-sm-6">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="fa fa-address-card"></i>
+          </div>
+        </div> 
+        <input id="txtUsername" name="txtUsername" placeholder="Please enter usename" type="text" class="form-control" required="required" for="inputSuccess">
+		  <abbr title="Username not valid"><i class="fa fa-exclamation-circle" id="errU"></i> </abbr><i class="fa fa-check" id="valU"></i>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="txtPass" class="col-sm-3 col-form-label">Password</label> 
+    <div class="col-sm-6">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="fa fa-key"></i>
+          </div>
+        </div> 
+        <input id="txtPass" name="txtPass" placeholder="Please enter password" type="password" class="form-control" required="required"><abbr title="Password must have from 6 characters"><i class="fa fa-exclamation-circle" id="errPw"></i></abbr><i class="fa fa-check" id="valPw"></i>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="txtConfirm" class="col-sm-3 col-form-label">Confirm Password</label> 
+    <div class="col-sm-6">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="fa fa-key"></i>
+          </div>
+        </div> 
+        <input id="txtConfirm" name="txtConfirm" placeholder="Please confirm password" type="password" class="form-control" required="required"><abbr title="Password not match"><i class="fa fa-exclamation-circle" id="errC"></i></abbr><i class="fa fa-check" id="valC"></i>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="txtEmail" class="col-sm-3 col-form-label">Email</label> 
+    <div class="col-sm-6">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="fa fa-envelope-o"></i>
+          </div>
+        </div> 
+        <input id="txtEmail" name="txtEmail" placeholder="Please enter email" type="text" required="required" class="form-control">
+		  <abbr title="Mail is not valid"><i class="fa fa-exclamation-circle" id="errM"></i></abbr><i class="fa fa-check" id="valM"></i>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="txtPhone" class="col-sm-3 col-form-label">Phone</label> 
+    <div class="col-sm-6">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="fa fa-phone"></i>
+          </div>
+        </div> 
+        <input id="txtPhone" name="txtPhone" placeholder="Please enter number phone" type="text" class="form-control" required="required"><abbr title="Phone is not valid"><i class="fa fa-exclamation-circle" id="errP"></i></abbr><i class="fa fa-check" id="valP"></i>
+	  </div>
+	  </div>
+  </div>
+		
+		<div class="form-group row">
+    <label for="txtDate" class="col-sm-3 col-form-label">Birthday</label> 
+    <div class="col-sm-6">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <i class="fa fa-calendar"></i>
+          </div>
+        </div> 
+        <input id="txtB" name="txtB" type="date" class="form-control" required="required"><abbr title="DoB is not valid"><i class="fa fa-exclamation-circle" id="errB"></i></abbr><i class="fa fa-check" id="valB"></i>
+		  <label for="txtB" class="form-label"></label>
+	  </div>
+	  </div>
+  </div>
+		
+  <div class="form-group row">
+    <label class="col-sm-3">Gender</label> 
+    <div class="col-8">
+ 
+     <div class="custom-control custom-radio custom-control-inline">
+        <input name="radio" id="radio_0" type="radio" class="custom-control-input" value="male" required="required" checked> 
+        <label for="radio_0" class="custom-control-label"><i class="fa fa-male"></i></label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="radio" id="radio_1" type="radio" class="custom-control-input" value="female" required="required"> 
+        <label for="radio_1" class="custom-control-label"><i class="fa fa-female"></i></label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="radio" id="radio_2" type="radio" class="custom-control-input" value="other" required="required"> 
+        <label for="radio_2" class="custom-control-label">Other</label>
+      </div>
+    </div>
+  </div> 
+  <div class="form-group row">
+    <div class="offset-sm-4 col-sm-6">
+      <button name="submit" type="submit" class="btn btn-primary">Register</button>
+    </div>
+  </div>
+		<div class="nortifi">
+		<div class="alert alert-success" id="valS">Register <b>Successful</b></div>
+		<div class="alert alert-danger" id="valD">Register <b>failed</b></div>
+		</div>
+</form>
+</body>
+</html>
